@@ -1,0 +1,24 @@
+name: Notificação - Nova issue
+on:
+  issues:
+    types: [opened]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Notify Python Floripa on Telegram
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+      format: html
+        disable_web_page_preview: true
+        message: |
+          <b>✨ Nova issue no Github!</b>
+          
+          <code>${{ github.event.issue.title }}</code>
+          ${{ github.event.issue.url }}
+          
+          <b>Participe!</b>
