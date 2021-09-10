@@ -19,6 +19,6 @@ jobs:
           <b>✨ Nova issue no Github!</b>
           
           <code>${{ github.event.issue.title }}</code>
-          ${{ github.event.issue.url }}
+          ${{ github.event.issue.html_url }}
           
           <b>Participe!</b>
