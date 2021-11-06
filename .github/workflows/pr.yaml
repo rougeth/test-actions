@@ -1,0 +1,10 @@
+# Workflow será executado sempre que um pull request for criado no repositório
+on: pull_request
+
+# Workflow com apenas um job, `hello_world`, que por sua vez, define dois passos: 1) mostra na tela a mensagem "Olá" usando o comando echo, e 2) mostra na tela a mensagem "Mundo", usando python.
+jobs:
+  hello_world:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Olá"
+      - run: python -c 'print("Mundo")
