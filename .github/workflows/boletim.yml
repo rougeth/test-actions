@@ -3,11 +3,11 @@
 # termos de serviço, política de privacidade e suporte separados
 # documentação.
 
-name: Weekly Team Sync
+name: Boletim
 
 on:
-  - workflow_dispatch:
-  - schedule:
+  workflow_dispatch:
+  schedule:
     - cron: 0 0 1 * *
 
 jobs:
