@@ -30,7 +30,7 @@ jobs:
 
       - name: Get issue template
         uses: imjohnbo/extract-issue-template-fields@v0.0.1
-        id: template
+        id: extract
         with:
           path: .github/ISSUE_TEMPLATE/boletim.md
 
@@ -59,6 +59,6 @@ jobs:
         uses: imjohnbo/issue-bot@v3
         with:
           assignees: ${{ steps.script.outputs.assignee }}
-          labels: ${{ steps.template.outputs.labels }}
+          labels: ${{ steps.extract.outputs.labels }}
           title: ${{ steps.script.outputs.title }}
-          body: ${{ steps.template.outputs.body }}
+              body: ${{ steps.extract.outputs.body }}
