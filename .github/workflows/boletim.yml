@@ -9,6 +9,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: 0 0 1 * *
+    
+env:
+  LANG: "pt_BR.UTF-8"
 
 jobs:
   create_issue:
@@ -16,9 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      LANG: "pt_BR.UTF-8"
     permissions:
       issues: write
     steps:
+      - name: Configure locale
+        run: |
+          sudo locale-gen pt_BR.UTF-8
+          sudo update-locale LANG=pt_BR.UTF-8
+
       - name: Get issue template
         uses: imjohnbo/extract-issue-template-fields@v0.0.1
         id: template
