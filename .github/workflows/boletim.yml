@@ -61,4 +61,4 @@ jobs:
           assignees: ${{ steps.script.outputs.assignee }}
           labels: ${{ steps.extract.outputs.labels }}
           title: ${{ steps.script.outputs.title }}
-              body: ${{ steps.extract.outputs.body }}
+          body: ${{ steps.extract.outputs.body }}
