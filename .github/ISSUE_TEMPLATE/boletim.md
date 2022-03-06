@@ -4,7 +4,6 @@ about: Boletim Informativo Mensal
 title: "Boletim Informativo - <Mês>, <Ano>"
 labels: "Com Prazo"
 assignees: ''
-
 ---
 
 **Data para envio**: <último dia do mês> de <mês>
