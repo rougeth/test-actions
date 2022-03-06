@@ -1,0 +1,69 @@
+# This workflow uses actions that are not certified by GitHub.
+# São fornecidas por terceiros e regidas por
+# termos de serviço, política de privacidade e suporte separados
+# documentação.
+
+name: Weekly Team Sync
+
+on:
+  - workflow_dispatch:
+  - schedule:
+    - cron: 0 0 1 * *
+
+env:
+  MONTH_01: "Janeiro"
+  MONTH_02: "Fevereiro"
+  MONTH_03: "Março"
+  MONTH_04: "Abril"
+  MONTH_05: "Maio"
+  MONTH_06: "Junho"
+  MONTH_07: "Julho"
+  MONTH_08: "Agosto"
+  MONTH_09: "Setembro"
+  MONTH_10: "Outubro"
+  MONTH_11: "Novembro"
+  MONTH_12: "Dezembro"
+
+jobs:
+  create_issue:
+    name: Create team sync issue
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      issues: write
+    steps:
+      - name: Get issue template
+        uses: imjohnbo/extract-issue-template-fields@v0.0.1
+        id: template
+          with:
+          path: .github/ISSUE_TEMPLATE/boletim.md
+
+      - name: Define title and assignee
+        id: script
+        run: |
+          # Define issue title
+          LANG=pt_BR
+          month=$(date +%B)
+          year=$(date +%Y)
+          title="Boletim Informativo de $month de $year"
+          echo "::set-output name=title::$title"
+          
+          # Define issue assignee
+          assignees[0]="tiidadavena"
+          assignees[1]="muriloviana"
+          assignees[2]="rougeth"
+          assignees[3]="anadulce"
+
+          month=$(date +%m)
+          size=${#assignees[@]}
+          index=$(($month % $size))
+          echo "::set-output name=assignee::${assignees[$index]}"
+
+      - name: Create issue
+        uses: imjohnbo/issue-bot@v3
+        with:
+          assignees: ${{ steps.script.outputs.assignee }}
+          labels: ${{ steps.template.outputs.labels }}
+          title: ${{ steps.script.outputs.title }}
+          body: ${{ steps.template.outputs.body }}
