@@ -11,7 +11,7 @@ on:
       event:
         description: 'Evento'     
         required: true
-      descripion:
+      description:
         description: 'Descrição da nota fiscal'
         required: true 
     
