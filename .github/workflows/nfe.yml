@@ -34,7 +34,7 @@ jobs:
         uses: imjohnbo/extract-issue-template-fields@v0.0.1
         id: extract
         with:
-        path: .github/ISSUE_TEMPLATE/nfe.md
+          path: .github/ISSUE_TEMPLATE/nfe.md
 
       - name: Define título e texto
         id: script
@@ -42,7 +42,7 @@ jobs:
           # Título
           title="Nota Fiscal: $EVENT - $DESCRIPTION"
           # Descrição
-          body=`sed "s/<evento>/${EVENT}/" <<< $ISSUE | sed "s/<descrição>/${DESCRIPTION}/" | sed "s/<valor>/${VALUE}/"`
+          body=`sed "s/<evento>/${EVENT}/" <<< "$ISSUE" | sed "s/<descrição>/${DESCRIPTION}/" | sed "s/<valor>/${VALUE}/"`
           echo "::set-output name=title::$title"
           echo "::set-output name=body::$body"
         env:
