@@ -14,6 +14,9 @@ on:
       description:
         description: 'Descrição da nota fiscal'
         required: true 
+      value:
+        description: 'Valor'
+        required: true         
     
 env:
   LANG: "pt_BR.UTF-8"
@@ -47,13 +50,19 @@ jobs:
         run: |
           # Define issue title
           title="Gerar Nova Fiscal - $EVENT - $DESCRIPTION"
+          body=`echo $ISSUE | sed "s/{{evento}}/${EVENT}/"`
+          value=`echo $VALUE | sed "s/{{valor}}/${VALUE}/"`
           echo "::set-output name=title::$title"
+          echo "::set-output name=body::$body"
+          echo "::set-output name=value::$value"
         env:
           EVENT: ${{ github.event.inputs.event }}
           DESCRIPTION: ${{ github.event.inputs.description }}
+          VALUE: ${{ github.event.inputs.value }}
+          ISSUE: ${{ steps.extract.outputs.body }}
 
       - name: Create issue
         uses: imjohnbo/issue-bot@v3
         with:
           title: ${{ steps.script.outputs.title }}
-          body: ${{ steps.extract.outputs.body }}
+          body: ${{ steps.script.outputs.body }}
