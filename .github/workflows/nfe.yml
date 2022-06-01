@@ -50,11 +50,9 @@ jobs:
         run: |
           # Define issue title
           title="Gerar Nova Fiscal - $EVENT - $DESCRIPTION"
-          body=`echo $ISSUE | sed "s/{{evento}}/${EVENT}/"`
-          value=`echo $VALUE | sed "s/{{valor}}/${VALUE}/"`
+          body=`echo $BODY | sed "s/{{evento}}/${EVENT}/" | sed "s/{{descrição}}/${DESCRIPTION}/" | sed "s/{{valor}}/${VALUE}/"`
           echo "::set-output name=title::$title"
           echo "::set-output name=body::$body"
-          echo "::set-output name=value::$value"
         env:
           EVENT: ${{ github.event.inputs.event }}
           DESCRIPTION: ${{ github.event.inputs.description }}
