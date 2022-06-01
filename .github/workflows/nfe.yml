@@ -1,0 +1,59 @@
+# This workflow uses actions that are not certified by GitHub.
+# São fornecidas por terceiros e regidas por
+# termos de serviço, política de privacidade e suporte separados
+# documentação.
+
+name: NFe
+
+on: 
+  workflow_dispatch:
+    inputs:
+      event:
+        description: 'Evento'     
+        required: true
+      descripion:
+        description: 'Descrição da nota fiscal'
+        required: true 
+    
+env:
+  LANG: "pt_BR.UTF-8"
+
+jobs:
+  create_issue:
+    name: Create NFe issue
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      issues: write
+    steps:
+      - name: Configure locale
+        run: |
+          sudo locale-gen pt_BR.UTF-8
+          sudo update-locale LANG=pt_BR.UTF-8
+          
+      - name: date
+        run: |
+          date
+
+      - name: Get issue template
+        uses: imjohnbo/extract-issue-template-fields@v0.0.1
+        id: extract
+        with:
+          path: .github/ISSUE_TEMPLATE/nfe.md
+
+      - name: Define title and assignee
+        id: script
+        run: |
+          # Define issue title
+          title="Gerar Nova Fiscal - $EVENT - $DESCRIPTION"
+          echo "::set-output name=title::$title"
+        env:
+          EVENT: ${{ github.event.inputs.event }}
+          DESCRIPTION: ${{ github.event.inputs.description }}
+
+      - name: Create issue
+        uses: imjohnbo/issue-bot@v3
+        with:
+          title: ${{ steps.script.outputs.title }}
+          body: ${{ steps.extract.outputs.body }}
