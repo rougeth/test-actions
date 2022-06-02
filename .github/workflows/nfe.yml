@@ -44,7 +44,7 @@ jobs:
           # Descrição
           body=`sed "s/<evento>/${EVENT}/" <<< "$ISSUE" | sed "s/<descrição>/${DESCRIPTION}/" | sed "s/<valor>/${VALUE}/"`
           echo "::set-output name=title::$title"
-          echo "::set-output name=body::$(echo -e $body)"
+          echo "::set-output name=body::$(echo -e "$body")"
         env:
           EVENT: ${{ github.event.inputs.event }}
           DESCRIPTION: ${{ github.event.inputs.description }}
