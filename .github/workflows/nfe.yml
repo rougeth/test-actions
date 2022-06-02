@@ -40,11 +40,14 @@ jobs:
         id: script
         run: |
           # Título
-          title="Nota Fiscal: $EVENT - $DESCRIPTION"
+          TITLE="Nota Fiscal: $EVENT - $DESCRIPTION"
           # Descrição
-          body=`sed "s/<evento>/${EVENT}/" <<< "$ISSUE" | sed "s/<descrição>/${DESCRIPTION}/" | sed "s/<valor>/${VALUE}/"`
-          echo "::set-output name=title::$title"
-          echo "::set-output name=body::$(echo -e "$body")"
+          BODY=`sed "s/<evento>/${EVENT}/" <<< "$ISSUE" | sed "s/<descrição>/${DESCRIPTION}/" | sed "s/<valor>/${VALUE}/"`
+          
+          echo "::set-output name=title::$TITLE"
+          echo "BODY<<EOF" >> $GITHUB_ENV
+          echo "$BODY" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         env:
           EVENT: ${{ github.event.inputs.event }}
           DESCRIPTION: ${{ github.event.inputs.description }}
