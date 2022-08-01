@@ -7,8 +7,6 @@ name: Boletim
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 0 0 1 * *
     
 env:
   LANG: "pt_BR.UTF-8"
