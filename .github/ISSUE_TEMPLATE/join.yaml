@@ -1,20 +1,26 @@
-name: 🐞 Bug
-description: File a bug/issue
-title: "[BUG] <title>"
-labels: [Bug, Needs Triage]
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - octocat
 body:
-- type: textarea
-  attributes:
-    label: Usuário no github (@leportella)
-    description: Nome de usuário no Github
-  validations:
-    required: True
-- type: dropdown
-    id: time
+  - type: textarea
+    id: what-happened
     attributes:
-      label: Time
-      multiple: false
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of our software are you running?
       options:
-        - pybr2023-org
-        - pybr2022-org
-        - pybr2021-org
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+    validations:
+      required: true
