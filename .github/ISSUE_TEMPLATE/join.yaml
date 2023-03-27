@@ -22,6 +22,6 @@ body:
       options:
         - pybr2024-org
         - pybr2023-org
-        - pybr2023-org
+        - pybr2022-org
     validations:
       required: true
