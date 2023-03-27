@@ -18,5 +18,3 @@ body:
         - pybr2023-org
         - pybr2022-org
         - pybr2021-org
-  validations:
-    required: true
