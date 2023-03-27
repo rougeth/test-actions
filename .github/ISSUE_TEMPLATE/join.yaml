@@ -5,10 +5,10 @@ labels: ["bug", "triage"]
 assignees:
   - octocat
 body:
-  - type: textarea
-    id: what-happened
+  - type: input
+    id: username
     attributes:
-      label: What happened?
+      label: @ no Github
       description: Also tell us, what did you expect to happen?
       placeholder: Tell us what you see!
       value: "A bug happened!"
@@ -17,10 +17,11 @@ body:
   - type: dropdown
     id: version
     attributes:
-      label: Version
+      label: Time
       description: What version of our software are you running?
       options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
+        - pybr2024-org
+        - pybr2023-org
+        - pybr2023-org
     validations:
       required: true
