@@ -1,0 +1,22 @@
+name: 🐞 Bug
+description: File a bug/issue
+title: "[BUG] <title>"
+labels: [Bug, Needs Triage]
+body:
+- type: textarea
+  attributes:
+    label: Usuário no github (@leportella)
+    description: Nome de usuário no Github
+  validations:
+    required: True
+- type: dropdown
+    id: time
+    attributes:
+      label: Time
+      multiple: false
+      options:
+        - pybr2023-org
+        - pybr2022-org
+        - pybr2021-org
+  validations:
+    required: true
